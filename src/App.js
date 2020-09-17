@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Switch, Route, useHistory } from 'react-router-dom'
 import UserKit from './data/UserKit'
+import Login from './pages/Login'
 
 export default function App() {
   const userKit = new UserKit()
@@ -11,35 +12,6 @@ export default function App() {
   const [password, setPassword] = useState("")
   const [organisationName, setOrganisationName] = useState("")
   const [organisationKind, setOrganisationKind] = useState("")
-
-  const [loginEmail, setLoginEmail] = useState("")
-  const [loginPassword, setLoginPassword] = useState("")
-
-  const history = useHistory()
-  const searchString = history.location.search
-  const urlParameters = new URLSearchParams(searchString)
-
-  const [uid, setUid] = useState(urlParameters.get('uid'))
-  const [token, setToken] = useState(urlParameters.get('token'))
-  
-  function handleActivateUser(){
-    userKit.arctivateUser(uid, token)
-    //  så fort användaren är registrerad så vill vi navigera användaren är klar
-    .then( () => {
-      setUid(null)
-      setToken(null)
-      history.push('/login')
-    })
-  }
-
-  function handleLogin(){
-    userKit.login(loginEmail, loginPassword)
-    .then(res => res.json())
-    .then( data => {
-      userKit.setToken(data.token);
-      history.push("/home")
-    })
-  }
 
   function handleRegister() {
     userKit.register(
@@ -97,26 +69,7 @@ export default function App() {
       </Route>
 
       <Route path="/login">
-        {uid && token ? (
-          <div>
-            {/* visa ifall man har uid och token i url:en annars login */}
-            <h2>Activate Account</h2>
-            <button onClick={handleActivateUser}>Activate User</button>
-          </div>
-
-        ):(
-          <div>
-            <h2>Login</h2>
-            <input placeholder="Email" 
-                  value={loginEmail} 
-                  onChange={ (e) => setLoginEmail(e.target.value)} />
-            <input placeholder="Password" 
-                  value={loginPassword} 
-                  onChange={ (e) => setLoginPassword(e.target.value)} />
-            <button onClick={handleLogin}>Login</button>
-          </div>
-        )
-        }
+        <Login />
       </Route>
 
       <Route path="/">
