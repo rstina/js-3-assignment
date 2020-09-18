@@ -55,6 +55,13 @@ export default class {
     })
   }
 
+  async getUser(){
+    const url = `${ROOT_URL}api/v1/clients/`
+    return fetch(url, {
+      headers: this.getPrivateHeaders(),
+    })
+  }
+
   setToken(token) {
     localStorage.setItem("BUSINESS_TOKEN", token)
   }
@@ -74,6 +81,6 @@ export default class {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${this.getToken()}`
     }
-}
+  }
 
 }

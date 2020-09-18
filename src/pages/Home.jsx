@@ -1,12 +1,20 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import UserKit from '../data/UserKit';
+import { ButtonLogin, Input, FormLogin } from '../style.js';
 
 export default function Home() {
   const userKit = new UserKit()
 
   const [customers, setCustomers] = useState(null)
   const [customerName, setCustomerName] = useState(null)
+  const [orgName, setOrgName] = useState(null)
+
   const customerInput = useRef(null)
+
+  useEffect(() => {
+    getUserOrganisation()
+  })
+
 
   function getCustomerList(){
     userKit.getCustomerList()
@@ -16,34 +24,42 @@ export default function Home() {
     })
   }
 
-  function handleAddCustomer(){
-    // userKit.addCustomer(customerName)
-    customerInput.current.value = ""
+  function getUserOrganisation(){
+    userKit.getUser()
+    .then(res => res.json())
+    .then( data => {
+      setOrgName(data.results[0].name)
+    })
   }
 
+  function handleAddCustomer(){
+    userKit.addCustomer(customerName)
+    customerInput.current.value = ""
+  }
+  
   return (
     <div>
-        <h2>Home</h2>
-      <div>
+      {orgName && (<h2>Home - {orgName}</h2>)}
+      <FormLogin>
         <label htmlFor="fullName" value="Full Name">
-          <input type="text" name="fullName" placeholder="Full Name" 
+          <Input type="text" name="fullName" placeholder="Full Name" 
             ref={customerInput}
             onChange={ (e) => {
               setCustomerName(e.target.value)} } />
         </label>
-        <button onClick={handleAddCustomer}>Add Customer</button>
-      </div>
+        <ButtonLogin onClick={handleAddCustomer}>Add Customer</ButtonLogin>
+      </FormLogin>
       <br/>
       <br/>
-      <div>
-        <button onClick={getCustomerList}>View Customers</button>
+      <FormLogin>
+        <ButtonLogin onClick={getCustomerList}>View Customers</ButtonLogin>
         <div>
           {customers && customers.map( (customer, index) => {
             return (<p key={index}>{customer.name}</p>)
           })
           }
         </div>
-      </div>
+      </FormLogin>
     </div>
   )
 }
