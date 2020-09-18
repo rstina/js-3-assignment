@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
+import { ButtonLogin, Input, FormLogin } from '../style.js';
 
 export default function Login() {
   const userKit = new UserKit()
@@ -44,16 +45,17 @@ export default function Login() {
         </div>
 
       ):(
-        <div>
+        <FormLogin>
           <h2>Login</h2>
-          <input placeholder="Email" 
+          <Input placeholder="Email" 
                 value={loginEmail} 
                 onChange={ (e) => setLoginEmail(e.target.value)} />
-          <input placeholder="Password" 
+          <Input placeholder="Password" 
+                type="password"
                 value={loginPassword} 
                 onChange={ (e) => setLoginPassword(e.target.value)} />
-          <button onClick={handleLogin}>Login</button>
-        </div>
+          <ButtonLogin onClick={handleLogin}>Login</ButtonLogin>
+        </FormLogin>
       )
     }
     </div>
