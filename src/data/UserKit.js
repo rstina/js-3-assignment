@@ -38,19 +38,29 @@ export default class {
     })
   }
 
-  async getCustomerList(){
-    const url = `${ROOT_URL}/api/v1/customers`
+  async getCustomerList() {
+    const url = `${ROOT_URL}api/v1/customers`
     return fetch(url, {
-      headers: this.getPrivateHeaders()
+      headers: this.getPrivateHeaders(),
     })
   }
 
-  setToken(token){
+  async addCustomer(name){
+    const url = `${ROOT_URL}api/v1/customers`
+    const payload = { name }
+    return fetch(url, {
+      method: "POST",
+      headers: this.getPrivateHeaders(),
+      body: JSON.stringify(payload)
+    })
+  }
+
+  setToken(token) {
     localStorage.setItem("BUSINESS_TOKEN", token)
   }
 
-  getToken(){
-    localStorage.getItem("BUSINESS_TOKEN")
+  getToken() {
+    return localStorage.getItem("BUSINESS_TOKEN")
   }
 
   getPublicHeaders(){
@@ -59,10 +69,11 @@ export default class {
     }
   }
 
-  getPrivateHeaders(){
+  getPrivateHeaders() {
     return {
-      "Content-Type": "application/json",
-      "Authorazation": `Bearer ${this.getToken()}`
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${this.getToken()}`
     }
-  }
+}
+
 }
