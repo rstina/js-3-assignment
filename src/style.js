@@ -9,6 +9,14 @@ export const Main = styled.main`
     font-weight: 400;
     color: #333;
   }
+  h2 {
+    margin: 1rem 0 0.5rem 0;
+    font-weight: 400;
+    color: #333;
+  }
+  p {
+    color: #333;
+  }
 `
 
 export const Button = styled.button`
@@ -58,11 +66,11 @@ export const Input = styled.input`
 
 export const FormLogin = styled.section`
   h2 {
-    margin: 0 0 0.5rem 0;
+    margin: 1rem 0 0.5rem 0;
     font-weight: 400;
     color: #333;
   }
   border-radius: 4px;
   background: #f2f2f2;
-  padding: 3rem;
+  padding: 0.5rem 2rem;
 `

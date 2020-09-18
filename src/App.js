@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import { Main } from './style.js';
+import { ButtonLogin } from './style.js';
 
 export default function App() {
 
@@ -27,10 +28,10 @@ export default function App() {
 
       <Route path="/">
         <Link to="/login">
-          <button>Login</button>
+          <ButtonLogin>Login</ButtonLogin>
         </Link>
         <Link to="/register">
-          <button>Register</button>
+          <ButtonLogin>Register</ButtonLogin>
         </Link>
       </Route>
       
