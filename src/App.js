@@ -4,38 +4,54 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import { Main } from './style.js';
-import { ButtonLogin } from './style.js';
+import Header from './components/Header'
+import Button from './components/Button'
+import CustomerDetail from './pages/CustomerDetail'
 
 export default function App() {
-
   return (
   <Main>
 
-    <h1>Business Project</h1>
-    <Switch>
+      <Switch>
 
-      <Route path="/home">
-        <Home />
-      </Route>
+        <Route path="/customer-detail/:id" render={ props => {
+          return (
+            <Header>
+              <CustomerDetail {...props} />
+            </Header>
+          )}}>
+        </Route>
 
-      <Route path="/login">
-        <Login />
-      </Route>
+        <Route path="/home">
+          <Header>
+            <Home />
+          </Header>
+        </Route>
 
-      <Route path="/register">
-        <Register />
-      </Route>
+        <Route path="/login">
+          <Header>
+            <Login />
+          </Header>
+        </Route>
 
-      <Route path="/">
-        <Link to="/login">
-          <ButtonLogin>Login</ButtonLogin>
-        </Link>
-        <Link to="/register">
-          <ButtonLogin>Register</ButtonLogin>
-        </Link>
-      </Route>
-      
-    </Switch>
+        <Route path="/register">
+          <Header>
+            <Register />
+          </Header>
+        </Route>
+
+        <Route path="/">
+          <Header>
+            <Link to="/login">
+              <Button>Login</Button>
+            </Link>
+            <Link to="/register">
+              <Button>Register</Button>
+            </Link>
+          </Header>
+        </Route>
+        
+      </Switch>
   </Main>
   )
 }
