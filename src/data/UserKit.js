@@ -38,6 +38,10 @@ export default class {
     })
   }
 
+  logout(){
+    localStorage.removeItem("BUSINESS_TOKEN")
+  }
+
   async getCustomerList() {
     const url = `${ROOT_URL}api/v1/customers`
     return fetch(url, {
@@ -45,9 +49,19 @@ export default class {
     })
   }
 
-  async addCustomer(name){
+  async deleteCustomer(id){
+    const url = `${ROOT_URL}api/v1/customers/${id}/`
+    console.log("DELETE ME - " + id);
+    
+  }
+
+  async addCustomer(name, organisationNr, reference){
     const url = `${ROOT_URL}api/v1/customers`
-    const payload = { name }
+    const payload = { 
+      name,
+      organisationNr,
+      reference 
+    }
     return fetch(url, {
       method: "POST",
       headers: this.getPrivateHeaders(),
