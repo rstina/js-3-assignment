@@ -1,30 +1,23 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import UserKit from '../data/UserKit';
-import { ButtonLogin, Input, FormLogin } from '../style.js';
+import { Input, FormLogin } from '../style.js';
+import Button from '../components/Button';
+import CustomerList from '../components/CustomerList';
 
 export default function Home() {
   const userKit = new UserKit()
 
-  const [customers, setCustomers] = useState(null)
-  const [customerName, setCustomerName] = useState(null)
   const [orgName, setOrgName] = useState(null)
 
-  const customerInput = useRef(null)
+  const [customerName, setCustomerName] = useState(null)
+  const [customerOrgNr, setCustomerOrgNr] = useState(null)
+  const [customerReference, setCustomerReference] = useState(null)
 
   useEffect(() => {
-    getUserOrganisation()
+    handleGetUserOrganisation()
   })
 
-
-  function getCustomerList(){
-    userKit.getCustomerList()
-    .then(res => res.json())
-    .then( data => {
-      setCustomers(data.results)
-    })
-  }
-
-  function getUserOrganisation(){
+  function handleGetUserOrganisation(){
     userKit.getUser()
     .then(res => res.json())
     .then( data => {
@@ -33,32 +26,30 @@ export default function Home() {
   }
 
   function handleAddCustomer(){
-    userKit.addCustomer(customerName)
-    customerInput.current.value = ""
+    userKit.addCustomer( customerName, customerOrgNr, customerReference)
   }
   
   return (
     <div>
       {orgName && (<h2>Home - {orgName}</h2>)}
       <FormLogin>
-        <label htmlFor="fullName" value="Full Name">
-          <Input type="text" name="fullName" placeholder="Full Name" 
-            ref={customerInput}
-            onChange={ (e) => {
-              setCustomerName(e.target.value)} } />
-        </label>
-        <ButtonLogin onClick={handleAddCustomer}>Add Customer</ButtonLogin>
-      </FormLogin>
-      <br/>
-      <br/>
-      <FormLogin>
-        <ButtonLogin onClick={getCustomerList}>View Customers</ButtonLogin>
-        <div>
-          {customers && customers.map( (customer, index) => {
-            return (<p key={index}>{customer.name}</p>)
-          })
-          }
-        </div>
+        <h2>Add New Customer</h2>
+        <Input type="text" name="fullName" placeholder="Full Name" 
+          onChange={ (e) => {
+            setCustomerName(e.target.value)
+          } } />
+        <Input type="text" name="organisationNr" placeholder="Organisation Nr" 
+          onChange={ (e) => {
+            setCustomerOrgNr(e.target.value)
+          } } />
+        <Input type="text" name="reference" placeholder="Reference" 
+          onChange={ (e) => {
+            setCustomerReference(e.target.value)
+          } } />
+          <Button onClickFunction={handleAddCustomer}>Add Customer</Button>
+        <br/>
+        <br/>
+        <CustomerList />
       </FormLogin>
     </div>
   )
