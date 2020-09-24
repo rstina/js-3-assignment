@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
+import { UserContext} from '../contexts/UserContext'
 
 const StyledNav = styled.nav`
   h1 {
@@ -14,6 +15,7 @@ const StyledNav = styled.nav`
 `
 
 export default function Header({children}) {
+  const { userInfo } = useContext(UserContext)  
 
   return (
     <div>
@@ -21,6 +23,7 @@ export default function Header({children}) {
         <StyledNav>
           <ul>
             <li><h1>Business Project</h1></li>
+            {userInfo && (<li>{userInfo.email} | {userInfo.firstName} {userInfo.lastName}</li>)}
           </ul>
         </StyledNav>
       </header>

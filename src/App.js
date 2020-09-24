@@ -1,17 +1,44 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
+import { CustomerListContext } from './contexts/CustomerListContext'
+import { UserContext } from './contexts/UserContext'
+import UserKit from './data/UserKit'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
+// import Test from './pages/Test'
 import { Main } from './style.js';
 import Header from './components/Header'
 import Button from './components/Button'
 import CustomerDetail from './pages/CustomerDetail'
 
 export default function App() {
+  const userKit = new UserKit()
+  const [customerList, setCustomerList] = useState(null)
+  const [userInfo, setUserInfo] = useState(null)
+
+  useEffect(() => {
+    userKit.getCustomerList()
+    .then(res => res.json())
+    .then( data => {
+      setCustomerList(data.results)
+      console.log("getCustomerList");
+    })
+  }, [])
+
+  useEffect(() => {
+    userKit.getClientInfo()
+    .then(res => res.json())
+    .then(data => {
+      setUserInfo(data) 
+      console.log("getClientInfo")
+    })
+  }, [])
+
   return (
   <Main>
-
+    <UserContext.Provider value={ {userInfo, setUserInfo} }>
+    <CustomerListContext.Provider value={ {customerList, setCustomerList} }>
       <Switch>
 
         <Route path="/customer-detail/:id" render={ props => {
@@ -52,6 +79,8 @@ export default function App() {
         </Route>
         
       </Switch>
+    </CustomerListContext.Provider>
+    </UserContext.Provider>
   </Main>
   )
 }

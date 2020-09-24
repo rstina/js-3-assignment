@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
-import { ButtonLogin, Input, FormLogin } from '../style.js';
+import { FormLogin } from '../style.js';
+// import { Input, FormLogin } from '../style.js';
+// import Button from '../components/Button';
 
 export default function Login() {
   const userKit = new UserKit()
@@ -18,7 +20,6 @@ export default function Login() {
 
   function handleActivateUser(){
     userKit.arctivateUser(uid, token)
-    //  så fort användaren är registrerad så vill vi navigera användaren är klar
     .then( () => {
       setUid(null)
       setToken(null)
@@ -47,14 +48,14 @@ export default function Login() {
       ):(
         <FormLogin>
           <h2>Login</h2>
-          <Input placeholder="Email" 
+          <input placeholder="Email" 
                 value={loginEmail} 
                 onChange={ (e) => setLoginEmail(e.target.value)} />
-          <Input placeholder="Password" 
+          <input placeholder="Password" 
                 type="password"
                 value={loginPassword} 
                 onChange={ (e) => setLoginPassword(e.target.value)} />
-          <ButtonLogin onClick={handleLogin}>Login</ButtonLogin>
+          <button onClick={handleLogin}>Login</button>
         </FormLogin>
       )
     }

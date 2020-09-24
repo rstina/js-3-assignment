@@ -49,9 +49,26 @@ export default class {
     })
   }
 
+  async getClientInfo(){
+    const url = `${ROOT_URL}api/v1/me`
+    return fetch(url, {
+      headers: this.getPrivateHeaders(),
+    })
+  }
+
+  async getCustomerInfo(id){
+    const url = `${ROOT_URL}api/v1/customers/${id}/`
+    return fetch(url, {
+      headers: this.getPrivateHeaders(),
+    })
+  }
+
   async deleteCustomer(id){
     const url = `${ROOT_URL}api/v1/customers/${id}/`
-    console.log("DELETE ME - " + id);
+    return fetch( url, {
+      method: "DELETE",
+      headers: this.getPrivateHeaders()
+    })
     
   }
 

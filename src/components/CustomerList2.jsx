@@ -1,11 +1,12 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserKit from '../data/UserKit';
 import { CustomerListContext} from '../contexts/CustomerListContext'
 
-export default function CustomerList() {
+
+export default function CustomerList2({customerList}) {
   const userKit = new UserKit()
-  const { customerList, setCustomerList } = useContext(CustomerListContext)
+  const { setCustomerList } = useContext(CustomerListContext)
 
   useEffect(() => {
     handleGetCustomerList()

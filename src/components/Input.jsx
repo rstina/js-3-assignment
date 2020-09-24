@@ -11,7 +11,7 @@ const StyledInput = styled.input`
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 0.9rem;
-  max-width: 500px;
+  max-width: 300px;
 `
 
 export default function Input({children}) {
