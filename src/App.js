@@ -6,7 +6,6 @@ import UserKit from './data/UserKit'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
-// import Test from './pages/Test'
 import { Main } from './style.js';
 import Header from './components/Header'
 import Button from './components/Button'
@@ -22,7 +21,6 @@ export default function App() {
     .then(res => res.json())
     .then( data => {
       setCustomerList(data.results)
-      console.log("getCustomerList");
     })
   }, [])
 
@@ -31,7 +29,6 @@ export default function App() {
     .then(res => res.json())
     .then(data => {
       setUserInfo(data) 
-      console.log("getClientInfo")
     })
   }, [])
 

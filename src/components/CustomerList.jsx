@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import UserKit from '../data/UserKit';
 import { CustomerListContext} from '../contexts/CustomerListContext'
 
-export default function CustomerList() {
+
+export default function CustomerList({customerList}) {
   const userKit = new UserKit()
-  const { customerList, setCustomerList } = useContext(CustomerListContext)
+  const { setCustomerList } = useContext(CustomerListContext)
 
   useEffect(() => {
     handleGetCustomerList()
@@ -40,7 +41,7 @@ export default function CustomerList() {
                   <td><button onClick={
                     () => { 
                       userKit.deleteCustomer(customer.id)
-                      .then(handleGetCustomerList())
+                      .then(() => { handleGetCustomerList() })
                       }}>x</button></td>
                 </tr>
             )

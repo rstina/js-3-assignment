@@ -1,35 +1,19 @@
 import React, {useState, useEffect, useContext} from 'react'
 import UserKit from '../data/UserKit'
-import { CustomerListContext} from '../contexts/CustomerListContext'
-import Button from '../components/Button';
+import Button from './Button';
 import { Input } from '../style.js';
 
-export default function CustomerForm() {
+export default function CustomerForm({handleGetCustomerList}) {
   const userKit = new UserKit()
 
   const [customerName, setCustomerName] = useState(null)
   const [customerOrgNr, setCustomerOrgNr] = useState(null)
   const [customerReference, setCustomerReference] = useState(null)
-  // const [customerVatNr, setCustomerVatNr] = useState(null)
-
-  const { setCustomerList } = useContext(CustomerListContext)
-
-  useEffect(() => {
-    handleGetCustomerList()
-  }, [])
-
-  function handleGetCustomerList(){
-    userKit.getCustomerList()
-    .then(res => res.json())
-    .then( data => { setCustomerList(data.results) })
-  }
 
   function handleAddCustomer(){
     userKit.addCustomer( customerName, customerOrgNr, customerReference)
-    .then(userKit.getCustomerList()
-      .then(res => res.json())
-      .then( data => { handleGetCustomerList() })
-    )
+    .then(res => res.json())
+    .then(data => { handleGetCustomerList() })
   }
 
   return (
