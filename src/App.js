@@ -18,19 +18,23 @@ export default function App() {
   const [userInfo, setUserInfo] = useState(null)
 
   useEffect(() => {
+    if(userKit.getToken()){
       userKit.getCustomerList()
       .then(res => res.json())
       .then( data => {
         setCustomerList(data.results)
       })
+    }
   }, [])
 
   useEffect(() => {
+    if(userKit.getToken()){
       userKit.getClientInfo()
       .then(res => res.json())
       .then(data => {
         setUserInfo(data) 
       })
+    }
   }, [])
 
   return (
