@@ -25,6 +25,7 @@ export default function Register() {
     <FormLogin onSubmit={handleSubmit(handleRegisterOnSubmit)}>
       <h2>Register</h2>
       <form>
+      <Label htmlFor="firstName">First Name:</Label>
         <Input  
         type="text" 
         name="firstName" 
@@ -40,6 +41,7 @@ export default function Register() {
       />
       {errors.firstName && errors.firstName.message}
 
+      <Label htmlFor="lastName">Last Name:</Label>
       <Input  
         type="text" 
         name="lastName" 
@@ -55,6 +57,7 @@ export default function Register() {
       />
       {errors.lastName && errors.lastName.message}
 
+      <Label htmlFor="email">*Email:</Label>
       <Input
         name="email"
         placeholder="Email"
@@ -70,6 +73,7 @@ export default function Register() {
       />
       {errors.email && errors.email.message}
 
+      <Label htmlFor="password">*Password:</Label>
       <Input  
         type="password" 
         name="password" 
@@ -86,6 +90,7 @@ export default function Register() {
       />
       {errors.password && errors.password.message}
 
+      <Label htmlFor="organisationName">Organisation Name:</Label>
       <Input 
         type="text" 
         name="organisationName" 
@@ -100,6 +105,7 @@ export default function Register() {
       />
       {errors.organisationName && errors.organisationName.message}
 
+      <Label htmlFor="organisationKind">*Organisation Kind (0, 1, 2):</Label>
       <Input 
         type="text" 
         name="organisationKind" 
