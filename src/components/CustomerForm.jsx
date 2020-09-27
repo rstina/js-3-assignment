@@ -2,13 +2,13 @@ import React from 'react'
 import { useForm } from "react-hook-form";
 import UserKit from '../data/UserKit'
 import Button from './Button';
-import { Input, InputWrapper, FormWrapper, Label } from '../style.js';
+import { Input, FormWrapper, Label } from '../style.js';
 
 export default function CustomerForm({handleGetCustomerList}) {
   const userKit = new UserKit()
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit, register, reset, errors } = useForm()
 
-  const addCustomerOnSubmit = (values) => { 
+  const addCustomerOnSubmit = (values, e) => { 
     userKit.addCustomer( 
       values.fullName, 
       values.organisationNr, 
@@ -20,7 +20,8 @@ export default function CustomerForm({handleGetCustomerList}) {
       values.phoneNumber
       )
     .then(res => res.json())
-    .then(data => { handleGetCustomerList() })      
+    .then(data => { handleGetCustomerList() })    
+    e.target.reset()  
   }
 
   return (
