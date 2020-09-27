@@ -3,7 +3,7 @@ import UserKit from '../data/UserKit'
 import Button from './Button';
 import { Input, InputWrapper, FormWrapper } from '../style.js';
 
-export default function CustomerForm({handleGetCustomerList}) {
+export default function CustomerForm2({handleGetCustomerList}) {
   const userKit = new UserKit()
 
   const [customerName, setCustomerName] = useState(null)
