@@ -20,12 +20,12 @@ export default function CustomerList({customerList}) {
 
   return (
     <div>
+      <h2>Customer List</h2>
       <table>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
-            <th>OrgNr</th>
+            <th>Org Nr</th>
             <th>Reference</th>
             <th></th>
           </tr>
@@ -33,19 +33,21 @@ export default function CustomerList({customerList}) {
         <tbody>
           {customerList && customerList.map( (customer, index) => {
             return (
-                <tr key={index}>
-                  <td><Link to={`/customer-detail/${customer.id}`}>{customer.id}</Link></td>
-                  <td>{customer.name}</td>
-                  <td>{customer.organisationNr}</td>
-                  <td>{customer.reference}</td>
-                  <td><button onClick={
-                    () => { 
-                      userKit.deleteCustomer(customer.id)
-                      .then(() => { handleGetCustomerList() })
-                      }}>x</button></td>
-                </tr>
+              <tr key={index}>
+                <td><Link to={`/customer-detail/${customer.id}`}>{customer.name}</Link></td>
+                <td>{customer.organisationNr}</td>
+                <td>{customer.reference}</td>
+                <td><button onClick={
+                  () => { 
+                    userKit.deleteCustomer(customer.id)
+                    .then(() => { handleGetCustomerList() })
+                    }}>x</button></td>
+              </tr>
             )
           })}
+          {customerList === undefined && (
+            <tr><td>No customers added</td></tr>
+          )}
         </tbody>
       </table>
     </div>
