@@ -1,15 +1,17 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
-import { FormLogin } from '../style.js';
-// import { Input, FormLogin } from '../style.js';
-// import Button from '../components/Button';
+import { UserContext} from '../contexts/UserContext'
+import { Input, FormLogin, ErrorText } from '../style.js';
+import Button from '../components/Button';
 
 export default function Login() {
   const userKit = new UserKit()
+  const { setUserInfo } = useContext(UserContext) 
 
   const [loginEmail, setLoginEmail] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
+  const [checkInput, setCheckInput] = useState(null)
 
   const history = useHistory()
   const searchString = history.location.search
@@ -31,8 +33,17 @@ export default function Login() {
     userKit.login(loginEmail, loginPassword)
     .then(res => res.json())
     .then( data => {
-      userKit.setToken(data.token);
-      history.push("/home")
+      if(data.token !== undefined){
+        userKit.setToken(data.token)
+        userKit.getClientInfo()
+        .then(res => res.json())
+        .then(data => {
+          setUserInfo(data) 
+        })
+        history.push("/home")
+      } else {
+        setCheckInput(true)
+      }
     })
   }
 
@@ -42,20 +53,21 @@ export default function Login() {
         <div>
           {/* visa ifall man har uid och token i url:en annars login */}
           <h2>Activate Account</h2>
-          <button onClick={handleActivateUser}>Activate User</button>
+          <Button onClick={handleActivateUser}>Activate User</Button>
         </div>
 
       ):(
         <FormLogin>
           <h2>Login</h2>
-          <input placeholder="Email" 
+          <Input placeholder="Email" 
                 value={loginEmail} 
                 onChange={ (e) => setLoginEmail(e.target.value)} />
-          <input placeholder="Password" 
+          <Input placeholder="Password" 
                 type="password"
                 value={loginPassword} 
                 onChange={ (e) => setLoginPassword(e.target.value)} />
-          <button onClick={handleLogin}>Login</button>
+          {checkInput && <ErrorText>Incorrect email or password</ErrorText>}
+          <Button onClick={handleLogin}>Login</Button>
         </FormLogin>
       )
     }
