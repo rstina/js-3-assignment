@@ -21,7 +21,13 @@ export default function CustomerHome() {
   return (
     <div>
       <CustomerList customerList={customerList}  />
-      <CustomerForm handleGetCustomerList={handleGetCustomerList} />
+
+      {customerList && customerList.length < 10 ? <div>
+        <h2>Create New Customer</h2>
+        <CustomerForm handleGetCustomerList={handleGetCustomerList} /> 
+      </div>
+      : <h2>Delete an old customer to add a new (max 10)</h2>}
+      
     </div>
   )
 }

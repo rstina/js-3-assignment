@@ -26,7 +26,6 @@ export default function CustomerForm({handleGetCustomerList}) {
 
   return (
     <div>
-    <h2>Create New Customer</h2>
     <FormWrapper onSubmit={handleSubmit(addCustomerOnSubmit)} >
       <Label htmlFor="fullName">*Full Name:</Label>
       <Input  
