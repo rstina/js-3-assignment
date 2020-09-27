@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
 import { FormLogin } from '../style.js';
-// import Button from '../components/Button';
-// import {Input} from '../style'
+import Button from '../components/Button';
+import {Input, Label} from '../style'
 
 export default function Register() {
   const userKit = new UserKit()
@@ -30,12 +30,14 @@ export default function Register() {
   function renderInput(index, placeholder, stateVariable, stateSetVariable){
     return(
       <div key={index}>
-        <label>{placeholder}: </label><br/>
-        <input 
+        <Label>{placeholder}: </Label>
+        <Input 
           placeholder={placeholder} 
           value={stateVariable} 
           onChange={ 
-            (e) => stateSetVariable(e.target.value) 
+            (e) => {
+              stateSetVariable(e.target.value)
+            }
           }
         />
       </div>
@@ -56,7 +58,7 @@ export default function Register() {
         {inputObjects.map((inputItem, index)=>{
           return renderInput(index, inputItem[0], inputItem[1], inputItem[2])
         })}
-        <button onClick={handleRegister}>Register</button>
+        <Button onClick={handleRegister}>Register</Button>
       </FormLogin>
   )
 }
