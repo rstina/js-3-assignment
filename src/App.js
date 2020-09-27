@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
-import { CustomerListContext } from './contexts/CustomerListContext'
-import { UserContext } from './contexts/UserContext'
-import UserKit from './data/UserKit'
+import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Home from './pages/Home'
-import { Main } from './style.js';
+import CustomerDetailPage from './pages/CustomerDetailPage'
 import Header from './components/Header'
 import Button from './components/Button'
-import CustomerDetail from './pages/CustomerDetail'
+import UserKit from './data/UserKit'
+import { CustomerListContext } from './contexts/CustomerListContext'
+import { UserContext } from './contexts/UserContext'
+import { Main } from './style.js';
 
 export default function App() {
   const userKit = new UserKit()
@@ -17,19 +17,19 @@ export default function App() {
   const [userInfo, setUserInfo] = useState(null)
 
   useEffect(() => {
-    userKit.getCustomerList()
-    .then(res => res.json())
-    .then( data => {
-      setCustomerList(data.results)
-    })
+      userKit.getCustomerList()
+      .then(res => res.json())
+      .then( data => {
+        setCustomerList(data.results)
+      })
   }, [])
 
   useEffect(() => {
-    userKit.getClientInfo()
-    .then(res => res.json())
-    .then(data => {
-      setUserInfo(data) 
-    })
+      userKit.getClientInfo()
+      .then(res => res.json())
+      .then(data => {
+        setUserInfo(data) 
+      })
   }, [])
 
   return (
@@ -41,7 +41,7 @@ export default function App() {
         <Route path="/customer-detail/:id" render={ props => {
           return (
             <Header>
-              <CustomerDetail {...props} />
+              <CustomerDetailPage {...props} />
             </Header>
           )}}>
         </Route>
