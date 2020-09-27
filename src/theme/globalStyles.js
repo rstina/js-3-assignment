@@ -13,11 +13,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   table {
+    text-align: left;
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 100%;
     background: #fff;
     color: #888;
+  }
+
+  tr:nth-child(even){
+    background-color: #fff;
   }
 
   button {
