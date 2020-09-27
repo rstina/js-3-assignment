@@ -38,46 +38,25 @@ export default class {
     })
   }
 
-  logout(){
-    localStorage.removeItem("BUSINESS_TOKEN")
-  }
-
+  
   async getCustomerList() {
     const url = `${ROOT_URL}api/v1/customers`
     return fetch(url, {
       headers: this.getPrivateHeaders(),
     })
   }
-
-  async getClientInfo(){
-    const url = `${ROOT_URL}api/v1/me`
-    return fetch(url, {
-      headers: this.getPrivateHeaders(),
-    })
-  }
-
-  async getCustomerInfo(id){
-    const url = `${ROOT_URL}api/v1/customers/${id}/`
-    return fetch(url, {
-      headers: this.getPrivateHeaders(),
-    })
-  }
-
-  async deleteCustomer(id){
-    const url = `${ROOT_URL}api/v1/customers/${id}/`
-    return fetch( url, {
-      method: "DELETE",
-      headers: this.getPrivateHeaders()
-    })
-    
-  }
-
-  async addCustomer(name, organisationNr, reference){
+  
+  async addCustomer(name, organisationNr, vatNr, reference, paymentTerm, website, email, phoneNumber){
     const url = `${ROOT_URL}api/v1/customers`
     const payload = { 
       name,
       organisationNr,
-      reference 
+      vatNr,
+      reference,
+      paymentTerm,
+      website,
+      email,
+      phoneNumber
     }
     return fetch(url, {
       method: "POST",
@@ -85,20 +64,65 @@ export default class {
       body: JSON.stringify(payload)
     })
   }
-
+  
+  async getCustomerInfo(id){
+    const url = `${ROOT_URL}api/v1/customers/${id}/`
+    return fetch(url, {
+      headers: this.getPrivateHeaders(),
+    })
+  }
+  
+  async deleteCustomer(id){
+    const url = `${ROOT_URL}api/v1/customers/${id}/`
+    return fetch( url, {
+      method: "DELETE",
+      headers: this.getPrivateHeaders()
+    }) 
+  }
+  
+  async putCustomer(id, name, organisationNr, vatNr, reference, paymentTerm, website, email, phoneNumber){
+    const url = `${ROOT_URL}api/v1/customers/${id}/`
+    const payload = { 
+      name,
+      organisationNr,
+      vatNr,
+      reference,
+      paymentTerm,
+      website,
+      email,
+      phoneNumber
+    }
+    return fetch( url, {
+      method: "PUT",
+      headers: this.getPrivateHeaders(),
+      body: JSON.stringify(payload)
+    }) 
+  }
+  
+  async getClientInfo(){
+    const url = `${ROOT_URL}api/v1/me`
+    return fetch(url, {
+      headers: this.getPrivateHeaders(),
+    })
+  }
+  
   async getUser(){
     const url = `${ROOT_URL}api/v1/clients/`
     return fetch(url, {
       headers: this.getPrivateHeaders(),
     })
   }
-
+  
   setToken(token) {
     localStorage.setItem("BUSINESS_TOKEN", token)
   }
-
+  
   getToken() {
     return localStorage.getItem("BUSINESS_TOKEN")
+  }
+  
+  logout(){
+    return localStorage.removeItem("BUSINESS_TOKEN")
   }
 
   getPublicHeaders(){
