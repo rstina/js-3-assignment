@@ -1,68 +1,173 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {Input, Label} from '../style'
-import Button from './Button';
+import { useForm } from "react-hook-form";
 import UserKit from '../data/UserKit';
+import Button from './Button';
+import {Input, Label} from '../style'
 
 export default function CustomerDetailEdit({id, name, organisationNr, vatNr, reference, paymentTerm, website, email, phoneNumber}) {
   const userKit = new UserKit()
   const history = useHistory()
-
-  const [newName, setNewName] = useState(name)
-  const [newOrganisationNr, setNewOrganisationNr] = useState(organisationNr)
-  const [newVatNr, setNewVatNr] = useState(vatNr)
-  const [newReference, setNewReference] = useState(reference)
-  const [newPaymentTerm, setNewPaymentTerm] = useState(paymentTerm)
-  const [newWebsite, setNewOrgNr] = useState(website)
-  const [newEmail, setNewEmail] = useState(email)
-  const [newPhoneNumber, setNewPhoneNumber] = useState(phoneNumber)
-  
-  function renderInput(index, placeholder, defaultValue, stateVariable, setStateVariable){
-    return(
-      <div key={index}>
-        <Label>{placeholder}: </Label>
-        <Input 
-          placeholder={placeholder} 
-          defaultValue={defaultValue} 
-          onChange={ (e) => setStateVariable(e.target.value) }
-        />
-      </div>
-    )
-  }
-
-  function handleCustomerPut() {
-    userKit.putCustomer(
+  const { handleSubmit, register, errors } = useForm({
+    defaultValues: {
       id,
-      newName, 
-      newOrganisationNr, 
-      newVatNr, 
-      newReference,
-      newPaymentTerm,
-      newWebsite,
-      newEmail,
-      newPhoneNumber
+      name,
+      organisationNr, 
+      vatNr, 
+      reference, 
+      paymentTerm, 
+      website, 
+      email, 
+      phoneNumber
+    }
+  })
+
+  const handleCustomerPutOnSubmit = (values) => { 
+    userKit.putCustomer(
+      values.id,
+      values.name, 
+      values.organisationNr, 
+      values.vatNr, 
+      values.reference,
+      values.paymentTerm,
+      values.website,
+      values.email,
+      values.phoneNumber
     )
     history.push('/home')
   }
 
-  const inputObjects = [
-    ["Name", name, newName, setNewName],
-    ["Organisation Nr",organisationNr, newOrganisationNr, setNewOrganisationNr],
-    ["Vat Nr", vatNr, newVatNr, setNewVatNr],
-    ["Reference", reference, newReference, setNewReference],
-    ["Payment Term",paymentTerm, newPaymentTerm, setNewPaymentTerm],
-    ["Website",website, newWebsite, setNewOrgNr],
-    ["Email",email, newEmail, setNewEmail],
-    ["Phone Number",phoneNumber, newPhoneNumber, setNewPhoneNumber]
-  ]
-
   return (
     <div>
-      <h2>Edit - {name}</h2>
-      {inputObjects && inputObjects.map((inputItem, index)=>{
-        return renderInput(index, inputItem[0], inputItem[1], inputItem[2], inputItem[3])
-      })}
-      <Button onClick={handleCustomerPut}>Save Edit</Button>
+    <h2>Edit Customer</h2>
+    <form onSubmit={handleSubmit(handleCustomerPutOnSubmit)} >
+      <Label htmlFor="name">*Full Name:</Label>
+      <input type="hidden" name="id" ref={register}/>
+      <Input  
+        type="text" 
+        name="name" 
+        placeholder="Full Name" 
+        ref={register({
+          required: "Required",
+          maxLength: { value: 50, message: "To long" },
+          minLength: { value: 1 },
+          pattern: {
+            value: /^[a-zA-Z åäöÅÄÖ]+$/i,
+            message: "Invalid Name Format"
+          }
+        })}
+      />
+      {errors.fullName && errors.fullName.message}
+
+      <Label htmlFor="organisationNr">Organisation Number:</Label>
+      <Input 
+        type="text" 
+        name="organisationNr" 
+        placeholder="Organisation Number"
+        ref={register({
+          maxLength: {value: 30, message: "To long"},
+          pattern: {
+            value: /^[a-zA-Z0-9 åäöÅÄÖ]+$/i,
+            message: "Invalid Organisation Number"
+          }
+        })}
+      />
+      {errors.organisationNr && errors.organisationNr.message}
+
+      <Label htmlFor="vatNr">VAT Number:</Label>
+      <Input 
+        type="text" 
+        name="vatNr" 
+        placeholder="VAT Number"
+        ref={register({
+          maxLength: {value: 12, message: "To long"},
+          pattern: {
+            value: /^(SE)?[0-9]{10}$/i,
+            message: "Invalid VAT Number"
+          }
+        })}
+      />
+      {errors.vatNr && errors.vatNr.message}
+
+      <Label htmlFor="reference">Reference:</Label>
+      <Input 
+        type="text" 
+        name="reference" 
+        placeholder="Reference"
+        ref={register({
+          maxLength: {value: 50, message: "To long"},
+          pattern: {
+            value: /^[a-zA-Z0-9 åäöÅÄÖ&?%+-./:]+$/i,
+            message: "Invalid Reference"
+          }
+        })}
+      />
+      {errors.reference && errors.reference.message}
+
+      <Label htmlFor="paymentTerm">*Payment Term:</Label>
+      <Input 
+        type="text" 
+        name="paymentTerm" 
+        placeholder="Payment Term"
+        ref={register({
+          required: "Required",
+          max: {value: 2147483647, message: "To great a number"},
+          min: {value: 0, message: "To low a number"},
+          pattern: {
+            value: /^[0-9]+$/i,
+            message: "Invalid Payment Term"
+          }
+        })}
+      />
+      {errors.paymentTerm && errors.paymentTerm.message}
+      
+      <Label htmlFor="website">Website:</Label>
+      <Input 
+        type="text" 
+        name="website" 
+        placeholder="Website"
+        ref={register({
+          maxLength: {value: 50, message: "To long"},
+          pattern: {
+            value: /^[a-zA-Z0-9åäöÅÄÖ&?%+-./:]+$/i,
+            message: "Invalid Website"
+          }
+        })}
+      />
+      {errors.website && errors.website.message}
+      
+      <Label htmlFor="email">Email:</Label>
+      <Input
+        type="email"
+        name="email"
+        placeholder="Email"
+        ref={register({
+          maxLength: {value: 254, message: "To long"},
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid Email"
+          }
+        })}
+      />
+      {errors.email && errors.email.message}
+
+      <Label htmlFor="phoneNumber">Phone Number:</Label>
+      <Input 
+        type="text" 
+        name="phoneNumber" 
+        placeholder="Phone Number"
+        ref={register({
+          maxLength: {value: 20, message: "To long"},
+          pattern: {
+            value: /^[a-zA-Z0-9+-]+$/i,
+            message: "Invalid Phone Number"
+          }
+        })}
+      />
+      {errors.phoneNumber && errors.phoneNumber.message}
+      <Button type="submit">Save Edited Customer</Button>
+    </form>
     </div>
   )
+
 }

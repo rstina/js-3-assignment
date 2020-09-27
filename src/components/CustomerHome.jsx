@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import CustomerList from './CustomerList'
-// import CustomerForm from './CustomerForm'
-import CustomerForm2 from './CustomerForm2'
+import CustomerForm from './CustomerForm'
 import UserKit from '../data/UserKit';
 import { CustomerListContext} from '../contexts/CustomerListContext'
 
@@ -22,8 +21,7 @@ export default function CustomerHome() {
   return (
     <div>
       <CustomerList customerList={customerList}  />
-      {/* <CustomerForm handleGetCustomerList={handleGetCustomerList} /> */}
-      <CustomerForm2 handleGetCustomerList={handleGetCustomerList} />
+      <CustomerForm handleGetCustomerList={handleGetCustomerList} />
     </div>
   )
 }

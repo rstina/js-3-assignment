@@ -3,6 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import RegisterConfirmation from './pages/RegisterConfirmation'
 import CustomerDetailPage from './pages/CustomerDetailPage'
 import Header from './components/Header'
 import Button from './components/Button'
@@ -55,6 +56,12 @@ export default function App() {
         <Route path="/login">
           <Header>
             <Login />
+          </Header>
+        </Route>
+
+        <Route path="/register-confirmation">
+          <Header>
+            <RegisterConfirmation />
           </Header>
         </Route>
 

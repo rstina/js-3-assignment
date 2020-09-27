@@ -10,15 +10,15 @@ const StyledButton = styled.button`
   /* max-width: 300px; */
   margin: 1rem auto;
   font-size: 1rem;
-  color: white;
   background-color: ${ props => props.theme.colors.main };
   border: 2px solid ${ props => props.theme.colors.main };
+  color:  white;
   transition: background-color 0.25s;
   &:hover {
     cursor: pointer;
     background-color: ${ props => props.theme.colors.dark };
     border: 2px solid ${ props => props.theme.colors.dark };
-  }  
+  }
 `
 export default function Button({children, onClick, type}) {
   return (

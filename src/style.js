@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  padding: 1rem;
   h1 {
     font-size: 2rem;
     font-weight: 400;
@@ -41,7 +40,7 @@ export const InputWrapper = styled.div`
   grid-gap: 1rem;
 `
 
-export const FormWrapper = styled.section`
+export const FormWrapper = styled.form`
   background: #f2f2f2;
   padding: 1rem;
 `

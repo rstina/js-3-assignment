@@ -51,7 +51,6 @@ export default function Login() {
     <div>
       {uid && token ? (
         <div>
-          {/* visa ifall man har uid och token i url:en annars login */}
           <h2>Activate Account</h2>
           <Button onClick={handleActivateUser}>Activate User</Button>
         </div>

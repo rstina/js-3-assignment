@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
   button {
     padding: 0.25rem;
   }
+
+  a {
+    text-decoration: none;
+  }
 `
 
 export default GlobalStyle;

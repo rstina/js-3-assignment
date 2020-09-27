@@ -1,12 +1,16 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import {useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import { UserContext} from '../contexts/UserContext'
 import UserKit from '../data/UserKit'
 
 const StyledNav = styled.nav`
+  color: ${ props => props.theme.colors.main };
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
   h1 {
-      display: inline;
+    display: inline;
+    font-weight: 300;
   }
   ul {
     display: flex;
@@ -36,7 +40,7 @@ export default function Header({children}) {
       <header>
         <StyledNav>
           <ul>
-            <li><h1>Business Project</h1></li>
+            <li><h1>BusinessName</h1></li>
             {userInfo && (<LiUserInfo>{userInfo.email} {userInfo.firstName} {userInfo.lastName}</LiUserInfo>)}
             {userKit.getToken() && (<li><button onClick={handleLogout}>Logout</button></li>)}
           </ul>
