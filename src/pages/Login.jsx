@@ -1,17 +1,15 @@
 import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
+import { useForm } from "react-hook-form";
 import UserKit from '../data/UserKit'
 import { UserContext} from '../contexts/UserContext'
-import { Input, FormWrapper, ErrorText, MainSection } from '../style.js';
+import { Input, FormWrapper, ErrorText, MainSection, Label } from '../style.js';
 import Button from '../components/Button';
 
 export default function Login() {
   const userKit = new UserKit()
   const { setUserInfo } = useContext(UserContext) 
-
-  const [loginEmail, setLoginEmail] = useState("")
-  const [loginPassword, setLoginPassword] = useState("")
-  const [checkInput, setCheckInput] = useState(null)
+  const { handleSubmit, register, errors } = useForm()
 
   const history = useHistory()
   const searchString = history.location.search
@@ -19,6 +17,7 @@ export default function Login() {
 
   const [uid, setUid] = useState(urlParameters.get('uid'))
   const [token, setToken] = useState(urlParameters.get('token'))
+  const [incorrectValues, setIncorrectValues] = useState(null)
 
   function handleActivateUser(){
     userKit.logout()
@@ -30,8 +29,8 @@ export default function Login() {
     })
   }
 
-  function handleLogin(){
-    userKit.login(loginEmail, loginPassword)
+  const handleLoginOnSubmit = (values) => {   
+    userKit.login(values.loginEmail, values.loginPassword)
     .then(res => res.json())
     .then( data => {
       if(data.token !== undefined){
@@ -42,8 +41,8 @@ export default function Login() {
           setUserInfo(data) 
         })
         history.push("/home")
-      } else {
-        setCheckInput(true)
+      } else if (data.token === undefined) {
+        setIncorrectValues("Inorrect email or password")
       }
     })
   }
@@ -55,19 +54,46 @@ export default function Login() {
           <h2>Activate Account</h2>
           <Button onClick={handleActivateUser}>Activate User</Button>
         </div>
-
       ):(
-        <FormWrapper>
+        <FormWrapper onSubmit={handleSubmit(handleLoginOnSubmit)}>
           <h2>Login</h2>
-          <Input placeholder="Email" 
-                value={loginEmail} 
-                onChange={ (e) => setLoginEmail(e.target.value)} />
-          <Input placeholder="Password" 
-                type="password"
-                value={loginPassword} 
-                onChange={ (e) => setLoginPassword(e.target.value)} />
-          {checkInput && <ErrorText>Incorrect email or password</ErrorText>}
-          <Button onClick={handleLogin}>Login</Button>
+
+          <Label htmlFor="loginEmail">Email:</Label>
+          <Input
+            name="loginEmail"
+            placeholder="Email"
+            ref={register({
+              required: "Required",
+              maxLength: {value: 254, message: "To long"},
+              minLength: { value: 1 },
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid Email"
+              }
+            })}
+          />
+          {errors.loginEmail && <ErrorText>{errors.loginEmail.message}</ErrorText>}
+          {incorrectValues && <ErrorText>{incorrectValues}</ErrorText>}
+
+          <Label htmlFor="loginPassword">Password:</Label>
+          <Input  
+            type="password" 
+            name="loginPassword" 
+            placeholder="Password" 
+            ref={register({
+              required: "Required",
+              maxLength: { value: 50, message: "To long"},
+              minLength: {value: 8, message: "Must be at least 8 characters"},
+              pattern: {
+                value: /^[a-zA-Z0-9-_%&?!.,]+$/i,
+                message: "Invalid Password Format"
+              }
+            })}
+          />
+          {errors.loginPassword && <ErrorText>{errors.loginPassword.message}</ErrorText>}
+          {incorrectValues && <ErrorText>{incorrectValues}</ErrorText>}
+
+          <Button type="submit">Login</Button>
         </FormWrapper>
       )
     }
