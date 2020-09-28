@@ -18,6 +18,7 @@ export default function Register() {
       values.password, 
       values.organisationName, 
       values.organisationKind);
+    userKit.logout()
     history.push('/register-confirmation')
   }
 

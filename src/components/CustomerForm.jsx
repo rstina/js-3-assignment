@@ -69,7 +69,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           maxLength: {value: 12, message: "To long"},
           pattern: {
             value: /^(SE)?[0-9]{10}$/i,
-            message: "Incorrect VAT Number SE0123456789"
+            message: "Incorrect VAT Number Format"
           }
         })}
       />
@@ -145,7 +145,7 @@ export default function CustomerForm({handleGetCustomerList}) {
         ref={register({
           maxLength: {value: 20, message: "To long"},
           pattern: {
-            value: /^[a-zA-Z0-9+-]+$/i,
+            value: /^[a-zA-Z 0-9+-]+$/i,
             message: "Invalid Phone Number"
           }
         })}

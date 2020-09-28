@@ -22,11 +22,12 @@ export default function CustomerHome() {
     <div>
       <CustomerList customerList={customerList}  />
 
-      {customerList && customerList.length < 10 ? 
-        <div>
+      {customerList && (customerList.length < 10) ? 
           <CustomerForm handleGetCustomerList={handleGetCustomerList} /> 
-        </div>
-      : <p>Delete a customer to add new (max 10)</p>}
+        : customerList && (customerList.length === 10) ? 
+          <p>Delete a customer to add new (max 10)</p> 
+        : <></>
+      }
       
     </div>
   )

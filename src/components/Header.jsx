@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Link} from 'react-router-dom'
 import styled from 'styled-components'
 import { UserContext} from '../contexts/UserContext'
 import UserKit from '../data/UserKit'
@@ -72,7 +72,7 @@ export default function Header({children}) {
       <header>
         <StyledNav>
           <ul>
-            <li><h1>BusinessName</h1></li>
+            <li><Link to="/home"><h1>BusinessName</h1></Link></li>
             <li>
               {userInfo && <>{userInfo.email} {userInfo.firstName} {userInfo.lastName} </>}
               {userKit.getToken() && (<ButtonSmall onClick={handleLogout} secondary>Logout</ButtonSmall>)}
