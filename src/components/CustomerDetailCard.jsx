@@ -7,7 +7,7 @@ export default function CustomerDetailCard( { name, organisationNr, vatNr, refer
         <Table>
           <tbody>
             <tr>
-              <th>Customer Detail - {name}</th>
+              <th>Customer Detail</th>
               <th></th>
             </tr>
             <tr>

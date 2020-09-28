@@ -21,7 +21,7 @@ export default function CustomerList({customerList}) {
 
   return (
     <div>
-      <h2>Customer List</h2>
+    <h2>Customer Home</h2>
       <Table>
         <thead>
           <tr>

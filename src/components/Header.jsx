@@ -31,19 +31,27 @@ const Main = styled.main`
     font-size: 2rem;
     font-weight: 400;
     color: #333;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
   }
   h2 {
     font-size: 1.6rem;
     font-weight: 400;
     color: #333;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
   }
   h3 {
     font-size: 1.2rem;
     font-weight: 400;
     color: #333;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
   }
   p {
     color: #333;
+    line-height: 1.2;
+    letter-spacing: 1px;
   }
 `
 

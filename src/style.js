@@ -68,31 +68,30 @@ export const DeleteButton = styled(SmallButton)`
 `
 
 export const Table = styled.table`
+  background: #fff;
+  color: #555;
   margin-bottom: 2rem;
   border-collapse: collapse;
   border: none;
   width: 100%;
-  background: #fff;
-  color: #555;
   th {
-    padding: 0.5rem 0;
-    text-align: left;
     background-color: ${ props => props.theme.colors.main };
     color: white;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: 1px;
   }
-
   td, th {
     padding: 8px;
   }
-
   tbody {
     border: 1px solid ${ props => props.theme.colors.light };
   }
-
   tr:nth-child(even){
     background-color: ${ props => props.theme.colors.light };
   }
-
   a {
     text-decoration: underline;
     &:hover{

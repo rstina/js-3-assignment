@@ -10,6 +10,8 @@ const StyledButton = styled.button`
   font-size: 1rem;
   background-color: ${ props => props.theme.colors.main };
   border: 2px solid ${ props => props.theme.colors.main };
+  text-transform: uppercase;
+  letter-spacing: 1px;
   color:  white;
   transition: background-color 0.25s;
   &:hover {
