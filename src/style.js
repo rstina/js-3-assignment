@@ -8,14 +8,9 @@ export const MainSection = styled.section`
   border: 1px solid #f8f8f8;
 `
 
-export const Input = styled.input`
-  width: 100%;
-  display: inline-block;
-  padding: 0.7rem 1rem;
-  color: #333;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  line-height: 1.4;
+export const FormWrapper = styled.form`
+  background: #f7f7f7;
+  padding: 3rem;
 `
 
 export const Label = styled.label`
@@ -24,9 +19,14 @@ export const Label = styled.label`
   font-size: 0.9rem;
 `
 
-export const FormWrapper = styled.form`
-  background: #f7f7f7;
-  padding: 3rem;
+export const Input = styled.input`
+  width: 100%;
+  display: inline-block;
+  padding: 0.7rem 1rem;
+  color: #333;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  line-height: 1.4;
 `
 
 export const ErrorText = styled.p`
