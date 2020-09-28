@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import { UserContext} from '../contexts/UserContext'
 import UserKit from '../data/UserKit'
-import { SmallButton } from '../style'
+import { ButtonSmall } from '../style'
 
 const StyledNav = styled.nav`
   color: ${ props => props.theme.colors.main };
@@ -26,7 +26,7 @@ const Main = styled.main`
   padding: 10vh 0;
   min-height: 80vh;
   width: 100%;
-  background-color: white;
+  background-color: ${ props => props.theme.colors.white };
   h1 {
     font-size: 2rem;
     font-weight: 400;
@@ -75,7 +75,7 @@ export default function Header({children}) {
             <li><h1>BusinessName</h1></li>
             <li>
               {userInfo && <>{userInfo.email} {userInfo.firstName} {userInfo.lastName} </>}
-              {userKit.getToken() && (<SmallButton onClick={handleLogout}>Logout</SmallButton>)}
+              {userKit.getToken() && (<ButtonSmall onClick={handleLogout} secondary>Logout</ButtonSmall>)}
             </li>
           </ul>
         </StyledNav>
