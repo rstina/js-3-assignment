@@ -38,7 +38,7 @@ export default function CustomerDetail(props) {
     return (
       <MainSection>
         {customerInfo && (
-          <FormWrapper>
+          <div>
             {edit===true && ( 
               <div>
                 <CustomerDetailEdit
@@ -71,7 +71,7 @@ export default function CustomerDetail(props) {
                 <Button onClick={handleCustomerDelete}>Delete</Button>
               </div>
             )}
-          </FormWrapper>
+          </div>
         )}
       </MainSection>
     )
