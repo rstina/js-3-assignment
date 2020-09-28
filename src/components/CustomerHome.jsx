@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react'
+import { CustomerListContext} from '../contexts/CustomerListContext'
+import UserKit from '../data/UserKit';
 import CustomerList from './CustomerList'
 import CustomerForm from './CustomerForm'
-import UserKit from '../data/UserKit';
-import { CustomerListContext} from '../contexts/CustomerListContext'
 
 export default function CustomerHome() {
   const userKit = new UserKit()

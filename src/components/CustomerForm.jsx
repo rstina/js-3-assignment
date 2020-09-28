@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import Button from './Button';
 import UserKit from '../data/UserKit'
+import Button from './Button';
 import { Input, FormWrapper, Label, ErrorText } from '../style.js';
 
 export default function CustomerForm({handleGetCustomerList}) {

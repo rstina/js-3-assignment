@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
-import { FormWrapper, MainSection } from '../style'
 import CustomerDetailCard from '../components/CustomerDetailCard'
 import CustomerDetailEdit from '../components/CustomerDetailEdit'
-import Button from '../components/Button';
 import Redirect from '../components/Redirect'
+import Button from '../components/Button';
+import { MainSection, ButtonDelete } from '../style'
 
 export default function CustomerDetail(props) {
   const userKit = new UserKit()
@@ -68,7 +68,7 @@ export default function CustomerDetail(props) {
                   phoneNumber={customerInfo.phoneNumber}
                   />
                 <Button onClick={handleCustomerEdit}>Edit</Button>
-                <Button onClick={handleCustomerDelete}>Delete</Button>
+                <ButtonDelete onClick={handleCustomerDelete}>Delete</ButtonDelete>
               </div>
             )}
           </div>

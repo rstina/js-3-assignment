@@ -1,10 +1,10 @@
 import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import UserKit from '../data/UserKit'
 import { UserContext} from '../contexts/UserContext'
-import { Input, FormWrapper, ErrorText, MainSection, Label } from '../style.js';
+import UserKit from '../data/UserKit'
 import Button from '../components/Button';
+import { Input, FormWrapper, ErrorText, MainSection, Label } from '../style.js';
 
 export default function Login() {
   const userKit = new UserKit()

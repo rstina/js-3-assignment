@@ -1,14 +1,14 @@
 import React, { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import UserKit from '../data/UserKit';
 import { CustomerListContext} from '../contexts/CustomerListContext'
-import { DeleteButton, Table } from '../style';
+import UserKit from '../data/UserKit';
+import Table from './Table';
+import { ButtonSmallDelete } from '../style';
 
 
 export default function CustomerList({customerList}) {
   const userKit = new UserKit()
   const { setCustomerList } = useContext(CustomerListContext)
-
   useEffect(() => {
     handleGetCustomerList()
   }, [])
@@ -39,11 +39,11 @@ export default function CustomerList({customerList}) {
                 <td><Link to={`/customer-detail/${customer.id}`}>{customer.name}</Link></td>
                 <td>{customer.organisationNr}</td>
                 <td>{customer.reference}</td>
-                <td><DeleteButton onClick={
+                <td><ButtonSmallDelete onClick={
                   () => { 
                     userKit.deleteCustomer(customer.id)
                     .then(() => { handleGetCustomerList() })
-                    }}>x</DeleteButton></td>
+                    }}>x</ButtonSmallDelete></td>
               </tr>
             )
           })}

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { MainSection } from '../style'
 import Button from '../components/Button'
+import { MainSection } from '../style'
 
 export default function RegisterConfirmation() {
   return (

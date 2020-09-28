@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from '../style'
+import Table from './Table';
 
 export default function CustomerDetailCard( { name, organisationNr, vatNr, reference, paymentTerm, website, email, phoneNumber } ){
     return (
@@ -16,7 +16,7 @@ export default function CustomerDetailCard( { name, organisationNr, vatNr, refer
             </tr>
             <tr>
               <td>Organisation Number:</td>
-              <td>{vatNr}</td>
+              <td>{organisationNr}</td>
             </tr>
             <tr>
               <td>Vat Number:</td>

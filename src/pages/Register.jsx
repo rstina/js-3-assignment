@@ -1,8 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-import Button from '../components/Button';
 import UserKit from '../data/UserKit'
+import Button from '../components/Button';
 import {Input, Label, FormWrapper, MainSection, ErrorText} from '../style'
 
 export default function Register() {
