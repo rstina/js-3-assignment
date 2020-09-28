@@ -17,7 +17,7 @@ export default function Register() {
       values.email, 
       values.password, 
       values.organisationName, 
-      values.organisationKind);
+      values.organisationKind)
     userKit.logout()
     history.push('/register-confirmation')
   }
@@ -26,12 +26,13 @@ export default function Register() {
     <MainSection>
       <FormWrapper onSubmit={handleSubmit(handleRegisterOnSubmit)}>
         <h2>Register</h2>
-        <Label htmlFor="firstName">First Name:</Label>
+        <Label htmlFor="firstName">*First Name:</Label>
           <Input  
           type="text" 
           name="firstName" 
           placeholder="First Name" 
           ref={register({
+            required: "Required",
             maxLength: { value: 30, message: "To long, max 30"},
             minLength: { value: 1 },
             pattern: {

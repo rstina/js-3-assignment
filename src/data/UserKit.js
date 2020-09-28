@@ -3,13 +3,17 @@ const ROOT_URL = "https://frebi.willandskill.eu/"
 export default class {
   async register(firstName, lastName, email, password, organisationName, organisationKind){
     const url = `${ROOT_URL}auth/users/`
-    const payload = {
-      firstName, 
-      lastName, 
+    let payload = {
+      firstName,
       email, 
       password, 
-      organisationName, 
       organisationKind
+    }
+    if(lastName.length > 0){
+      payload["lastName"] = lastName
+    }
+    if(organisationName.length > 0){
+      payload["organisationName"] = organisationName
     }
     return fetch(url, {
       method: "POST",
