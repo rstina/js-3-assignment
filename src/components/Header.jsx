@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import { UserContext} from '../contexts/UserContext'
 import UserKit from '../data/UserKit'
+import { SmallButton } from '../style'
 
 const StyledNav = styled.nav`
   color: ${ props => props.theme.colors.main };
@@ -15,14 +16,37 @@ const StyledNav = styled.nav`
   ul {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     list-style: none;
     padding: 0;
   }
 `
-const LiUserInfo = styled.li`
-  font-size: 0.8rem;
-  color: grey;
+
+const Main = styled.main`
+  padding: 10vh 0;
+  min-height: 80vh;
+  width: 100%;
+  background-color: white;
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #333;
+  }
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #333;
+  }
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #333;
+  }
+  p {
+    color: #333;
+  }
 `
+
 
 export default function Header({children}) {
   const { userInfo, setUserInfo } = useContext(UserContext) 
@@ -41,12 +65,14 @@ export default function Header({children}) {
         <StyledNav>
           <ul>
             <li><h1>BusinessName</h1></li>
-            {userInfo && (<LiUserInfo>{userInfo.email} {userInfo.firstName} {userInfo.lastName}</LiUserInfo>)}
-            {userKit.getToken() && (<li><button onClick={handleLogout}>Logout</button></li>)}
+            <li>
+              {userInfo && <>{userInfo.email} {userInfo.firstName} {userInfo.lastName} </>}
+              {userKit.getToken() && (<SmallButton onClick={handleLogout}>Logout</SmallButton>)}
+            </li>
           </ul>
         </StyledNav>
       </header>
-      <div>{children}</div>
+      <Main>{children}</Main>
     </div>
   )
 }

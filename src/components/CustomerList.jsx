@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import UserKit from '../data/UserKit';
 import { CustomerListContext} from '../contexts/CustomerListContext'
+import { DeleteButton, Table } from '../style';
 
 
 export default function CustomerList({customerList}) {
@@ -21,7 +22,7 @@ export default function CustomerList({customerList}) {
   return (
     <div>
       <h2>Customer List</h2>
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>Name</th>
@@ -31,25 +32,23 @@ export default function CustomerList({customerList}) {
           </tr>
         </thead>
         <tbody>
+  {customerList && customerList.length < 1 ? <tr><td>No Customers</td></tr> : <tr></tr> }
           {customerList && customerList.map( (customer, index) => {
             return (
               <tr key={index}>
                 <td><Link to={`/customer-detail/${customer.id}`}>{customer.name}</Link></td>
                 <td>{customer.organisationNr}</td>
                 <td>{customer.reference}</td>
-                <td><button onClick={
+                <td><DeleteButton onClick={
                   () => { 
                     userKit.deleteCustomer(customer.id)
                     .then(() => { handleGetCustomerList() })
-                    }}>x</button></td>
+                    }}>x</DeleteButton></td>
               </tr>
             )
           })}
-          {customerList === undefined && (
-            <tr><td>No customers added</td></tr>
-          )}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }

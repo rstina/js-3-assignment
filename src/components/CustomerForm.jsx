@@ -1,12 +1,12 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import UserKit from '../data/UserKit'
 import Button from './Button';
-import { Input, FormWrapper, Label } from '../style.js';
+import UserKit from '../data/UserKit'
+import { Input, FormWrapper, Label, ErrorText } from '../style.js';
 
 export default function CustomerForm({handleGetCustomerList}) {
   const userKit = new UserKit()
-  const { handleSubmit, register, reset, errors } = useForm()
+  const { handleSubmit, register, errors } = useForm()
 
   const addCustomerOnSubmit = (values, e) => { 
     userKit.addCustomer( 
@@ -27,7 +27,8 @@ export default function CustomerForm({handleGetCustomerList}) {
   return (
     <div>
     <FormWrapper onSubmit={handleSubmit(addCustomerOnSubmit)} >
-      <Label htmlFor="fullName">*Full Name:</Label>
+        <h3>Add New Customer</h3>
+      <Label htmlFor="fullName"><span>*</span>Full Name:</Label>
       <Input  
         type="text" 
         name="fullName" 
@@ -42,7 +43,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.fullName && errors.fullName.message}
+      {errors.fullName && <ErrorText>{errors.fullName.message}</ErrorText>}
 
       <Label htmlFor="organisationNr">Organisation Number:</Label>
       <Input 
@@ -57,7 +58,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.organisationNr && errors.organisationNr.message}
+      {errors.organisationNr && <ErrorText>{errors.organisationNr.message}</ErrorText>}
 
       <Label htmlFor="vatNr">VAT Number:</Label>
       <Input 
@@ -68,11 +69,11 @@ export default function CustomerForm({handleGetCustomerList}) {
           maxLength: {value: 12, message: "To long"},
           pattern: {
             value: /^(SE)?[0-9]{10}$/i,
-            message: "Invalid VAT Number"
+            message: "Incorrect VAT Number SE0123456789"
           }
         })}
       />
-      {errors.vatNr && errors.vatNr.message}
+      {errors.vatNr && <ErrorText>{errors.vatNr.message}</ErrorText>}
 
       <Label htmlFor="reference">Reference:</Label>
       <Input 
@@ -87,9 +88,9 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.reference && errors.reference.message}
+      {errors.reference && <ErrorText>{errors.reference.message}</ErrorText>}
 
-      <Label htmlFor="paymentTerm">*Payment Term:</Label>
+      <Label htmlFor="paymentTerm"><span>*</span>Payment Term:</Label>
       <Input 
         type="text" 
         name="paymentTerm" 
@@ -104,7 +105,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.paymentTerm && errors.paymentTerm.message}
+      {errors.paymentTerm && <ErrorText>{errors.paymentTerm.message}</ErrorText>}
       
       <Label htmlFor="website">Website:</Label>
       <Input 
@@ -119,7 +120,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.website && errors.website.message}
+      {errors.website && <ErrorText>{errors.website.message}</ErrorText>}
       
       <Label htmlFor="email">Email:</Label>
       <Input
@@ -134,7 +135,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.email && errors.email.message}
+      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
 
       <Label htmlFor="phoneNumber">Phone Number:</Label>
       <Input 
@@ -149,7 +150,7 @@ export default function CustomerForm({handleGetCustomerList}) {
           }
         })}
       />
-      {errors.phoneNumber && errors.phoneNumber.message}
+      {errors.phoneNumber && <ErrorText>{errors.phoneNumber.message}</ErrorText>}
       <Button type="submit">Add New Customer</Button>
     </FormWrapper>
     </div>

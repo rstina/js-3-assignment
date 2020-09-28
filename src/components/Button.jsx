@@ -3,11 +3,9 @@ import styled from 'styled-components'
 
 const StyledButton = styled.button`
   display: block;
-  /* border-radius: 4px; */
   margin: 0.75rem 0;
   padding: 0.65rem 0;
   width: 100%;
-  /* max-width: 300px; */
   margin: 1rem auto;
   font-size: 1rem;
   background-color: ${ props => props.theme.colors.main };

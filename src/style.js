@@ -1,63 +1,102 @@
 import styled from 'styled-components';
 
-export const Main = styled.main`
-  h1 {
-    font-size: 2rem;
-    font-weight: 400;
-    color: #333;
-  }
-  h2 {
-    margin: 1rem 0 0.5rem 0;
-    font-weight: 400;
-    color: #333;
-  }
-  p {
-    color: #333;
-  }
+export const MainSection = styled.section`
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #f8f8f8;
 `
 
 export const Input = styled.input`
   width: 100%;
   display: inline-block;
-  /* margin: 0.5rem 0; */
-  padding: 0.6rem .75rem;
+  padding: 0.7rem 1rem;
   color: #333;
   border: 1px solid #ddd;
-  /* border-radius: 4px; */
   box-sizing: border-box;
-  /* font-size: 0.9rem; */
-  /* max-width: 300px; */
+  line-height: 1.4;
 `
 
 export const Label = styled.label`
   display: block;
   margin-top: 1rem;
-`
-
-export const InputWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-gap: 1rem;
+  font-size: 0.9rem;
 `
 
 export const FormWrapper = styled.form`
-  background: #f2f2f2;
-  padding: 1rem;
+  background: #f7f7f7;
+  padding: 3rem;
 `
 
-export const FormLogin = styled.section`
-  align-items: center;
-  h2 {
-    margin: 1rem 0 0.5rem 0;
-    font-weight: 400;
-    color: #333;
-  }
-  border-radius: 4px;
-  background: #f2f2f2;
-  padding: 0.5rem 2rem;
-`
 export const ErrorText = styled.p`
   font-size: 0.9rem;
-  color: red;
+  font-style: italic;
   margin: 0;
+`
+
+export const SmallButton = styled.button`
+  padding: 0.25rem 0.5rem;
+  margin: 1rem auto;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background-color: white;
+  border: none;
+  color:  ${ props => props.theme.colors.main };
+  transition: background-color 0.25s;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: ${ props => props.theme.colors.dark };
+  }
+`
+
+export const DeleteButton = styled(SmallButton)`
+  margin: 0;
+  text-align: center;
+  width: 27px;
+  height: 27px;
+  padding: 0.25rem;
+  font-weight: 500;
+  color: white;
+  background-color: ${ props => props.theme.colors.main };
+  border: 1px solid ${ props => props.theme.colors.main };  
+  &:hover {
+    background-color: ${ props => props.theme.colors.accent };
+    border: 1px solid ${ props => props.theme.colors.accent };
+  }
+`
+
+export const Table = styled.table`
+  margin-bottom: 2rem;
+  border-collapse: collapse;
+  border: none;
+  width: 100%;
+  background: #fff;
+  color: #555;
+  th {
+    padding: 0.5rem 0;
+    text-align: left;
+    background-color: ${ props => props.theme.colors.main };
+    color: white;
+  }
+
+  td, th {
+    padding: 8px;
+  }
+
+  tbody {
+    border: 1px solid ${ props => props.theme.colors.light };
+  }
+
+  tr:nth-child(even){
+    background-color: ${ props => props.theme.colors.light };
+  }
+
+  a {
+    text-decoration: underline;
+    &:hover{
+      color: ${ props => props.theme.colors.accent };
+    }
+  }
 `

@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import UserKit from '../data/UserKit';
 import Button from './Button';
-import {Input, Label} from '../style'
+import {Input, Label, ErrorText} from '../style'
 
 export default function CustomerDetailEdit({id, name, organisationNr, vatNr, reference, paymentTerm, website, email, phoneNumber}) {
   const userKit = new UserKit()
@@ -41,7 +41,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
     <div>
     <h2>Edit Customer</h2>
     <form onSubmit={handleSubmit(handleCustomerPutOnSubmit)} >
-      <Label htmlFor="name">*Full Name:</Label>
+      <Label htmlFor="name"><span>*</span>Full Name:</Label>
       <input type="hidden" name="id" ref={register}/>
       <Input  
         type="text" 
@@ -57,7 +57,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.fullName && errors.fullName.message}
+      {errors.fullName && <ErrorText>{errors.fullName.message}</ErrorText>}
 
       <Label htmlFor="organisationNr">Organisation Number:</Label>
       <Input 
@@ -72,7 +72,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.organisationNr && errors.organisationNr.message}
+      {errors.organisationNr && <ErrorText>{errors.organisationNr.message}</ErrorText>}
 
       <Label htmlFor="vatNr">VAT Number:</Label>
       <Input 
@@ -87,7 +87,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.vatNr && errors.vatNr.message}
+      {errors.vatNr && <ErrorText>{errors.vatNr.message}</ErrorText>}
 
       <Label htmlFor="reference">Reference:</Label>
       <Input 
@@ -102,9 +102,9 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.reference && errors.reference.message}
+      {errors.reference && <ErrorText>{errors.reference.message}</ErrorText>}
 
-      <Label htmlFor="paymentTerm">*Payment Term:</Label>
+      <Label htmlFor="paymentTerm"><span>*</span>Payment Term:</Label>
       <Input 
         type="text" 
         name="paymentTerm" 
@@ -119,7 +119,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.paymentTerm && errors.paymentTerm.message}
+      {errors.paymentTerm && <ErrorText>{errors.paymentTerm.message}</ErrorText>}
       
       <Label htmlFor="website">Website:</Label>
       <Input 
@@ -134,7 +134,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.website && errors.website.message}
+      {errors.website && <ErrorText>{errors.website.message}</ErrorText>}
       
       <Label htmlFor="email">Email:</Label>
       <Input
@@ -149,7 +149,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.email && errors.email.message}
+      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
 
       <Label htmlFor="phoneNumber">Phone Number:</Label>
       <Input 
@@ -164,7 +164,7 @@ export default function CustomerDetailEdit({id, name, organisationNr, vatNr, ref
           }
         })}
       />
-      {errors.phoneNumber && errors.phoneNumber.message}
+      {errors.phoneNumber && <ErrorText>{errors.phoneNumber.message}</ErrorText>}
       <Button type="submit">Save Edited Customer</Button>
     </form>
     </div>

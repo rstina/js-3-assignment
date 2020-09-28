@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
-import { FormLogin } from '../style'
+import { FormWrapper, MainSection } from '../style'
 import CustomerDetailCard from '../components/CustomerDetailCard'
 import CustomerDetailEdit from '../components/CustomerDetailEdit'
 import Button from '../components/Button';
@@ -36,9 +36,9 @@ export default function CustomerDetail(props) {
 
   if(userKit.getToken()){
     return (
-      <div>
+      <MainSection>
         {customerInfo && (
-          <FormLogin>
+          <FormWrapper>
             {edit===true && ( 
               <div>
                 <CustomerDetailEdit
@@ -71,9 +71,9 @@ export default function CustomerDetail(props) {
                 <Button onClick={handleCustomerDelete}>Delete</Button>
               </div>
             )}
-          </FormLogin>
+          </FormWrapper>
         )}
-      </div>
+      </MainSection>
     )
   } else {
     return (

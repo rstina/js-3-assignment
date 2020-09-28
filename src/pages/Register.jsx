@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import Button from '../components/Button';
 import UserKit from '../data/UserKit'
-import {Input, Label, FormLogin} from '../style'
+import {Input, Label, FormWrapper, MainSection, ErrorText} from '../style'
 
 export default function Register() {
   const userKit = new UserKit()
@@ -22,7 +22,8 @@ export default function Register() {
   }
 
   return (
-    <FormLogin onSubmit={handleSubmit(handleRegisterOnSubmit)}>
+    <MainSection>
+    <FormWrapper onSubmit={handleSubmit(handleRegisterOnSubmit)}>
       <h2>Register</h2>
       <form>
       <Label htmlFor="firstName">First Name:</Label>
@@ -39,7 +40,7 @@ export default function Register() {
           }
         })}
       />
-      {errors.firstName && errors.firstName.message}
+      {errors.firstName && <ErrorText>{errors.firstName.message}</ErrorText>}
 
       <Label htmlFor="lastName">Last Name:</Label>
       <Input  
@@ -55,9 +56,9 @@ export default function Register() {
           }
         })}
       />
-      {errors.lastName && errors.lastName.message}
+      {errors.lastName && <ErrorText>{errors.lastName.message}</ErrorText>}
 
-      <Label htmlFor="email">*Email:</Label>
+      <Label htmlFor="email"><span>*</span>Email:</Label>
       <Input
         name="email"
         placeholder="Email"
@@ -71,9 +72,9 @@ export default function Register() {
           }
         })}
       />
-      {errors.email && errors.email.message}
+      {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
 
-      <Label htmlFor="password">*Password:</Label>
+      <Label htmlFor="password"><span>*</span>Password:</Label>
       <Input  
         type="password" 
         name="password" 
@@ -88,7 +89,7 @@ export default function Register() {
           }
         })}
       />
-      {errors.password && errors.password.message}
+      {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
 
       <Label htmlFor="organisationName">Organisation Name:</Label>
       <Input 
@@ -103,9 +104,9 @@ export default function Register() {
           }
         })}
       />
-      {errors.organisationName && errors.organisationName.message}
+      {errors.organisationName && <ErrorText>{errors.organisationName.message}</ErrorText>}
 
-      <Label htmlFor="organisationKind">*Organisation Kind (0, 1, 2):</Label>
+      <Label htmlFor="organisationKind"><span>*</span>Organisation Kind (0, 1, 2):</Label>
       <Input 
         type="text" 
         name="organisationKind" 
@@ -118,11 +119,12 @@ export default function Register() {
           }
         })}
       />
-      {errors.organisationKind && errors.organisationKind.message}
+      {errors.organisationKind && <ErrorText>{errors.organisationKind.message}</ErrorText>}
 
       <Button type="submit">Register</Button>
 
       </form>
-    </FormLogin>
+    </FormWrapper>  
+    </MainSection>
   )
 }

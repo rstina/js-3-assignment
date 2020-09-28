@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import RegisterConfirmation from './pages/RegisterConfirmation'
 import CustomerDetailPage from './pages/CustomerDetailPage'
 import Header from './components/Header'
-import Button from './components/Button'
 import UserKit from './data/UserKit'
 import { CustomerListContext } from './contexts/CustomerListContext'
 import { UserContext } from './contexts/UserContext'
-import { Main } from './style.js';
+import { MainSection } from './style.js';
+import Redirect from './components/Redirect'
 
 export default function App() {
   const userKit = new UserKit()
@@ -38,7 +38,7 @@ export default function App() {
   }, [])
 
   return (
-  <Main>
+  <div>
     <UserContext.Provider value={ {userInfo, setUserInfo} }>
     <CustomerListContext.Provider value={ {customerList, setCustomerList} }>
       <Switch>
@@ -77,18 +77,15 @@ export default function App() {
 
         <Route path="/">
           <Header>
-            <Link to="/login">
-              <Button>Login</Button>
-            </Link>
-            <Link to="/register">
-              <Button>Register</Button>
-            </Link>
+            <MainSection>
+              <Redirect />
+            </MainSection>
           </Header>
         </Route>
         
       </Switch>
     </CustomerListContext.Provider>
     </UserContext.Provider>
-  </Main>
+  </div>
   )
 }

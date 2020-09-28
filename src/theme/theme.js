@@ -1,8 +1,9 @@
 export default {
   colors: {
-    main: "#006bb3",
-    light: "#f2f2f2",
-    dark: "#004d80"
+    main: "#222",
+    light: "#f7f7f7",
+    dark: "#444",
+    accent: "#EB5F5F"
   },
   fontSize: {
     small: "0.8rem",

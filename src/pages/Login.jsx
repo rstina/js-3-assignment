@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserKit from '../data/UserKit'
 import { UserContext} from '../contexts/UserContext'
-import { Input, FormLogin, ErrorText } from '../style.js';
+import { Input, FormWrapper, ErrorText, MainSection } from '../style.js';
 import Button from '../components/Button';
 
 export default function Login() {
@@ -21,6 +21,7 @@ export default function Login() {
   const [token, setToken] = useState(urlParameters.get('token'))
 
   function handleActivateUser(){
+    userKit.logout()
     userKit.arctivateUser(uid, token)
     .then( () => {
       setUid(null)
@@ -48,7 +49,7 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <MainSection>
       {uid && token ? (
         <div>
           <h2>Activate Account</h2>
@@ -56,7 +57,7 @@ export default function Login() {
         </div>
 
       ):(
-        <FormLogin>
+        <FormWrapper>
           <h2>Login</h2>
           <Input placeholder="Email" 
                 value={loginEmail} 
@@ -67,9 +68,9 @@ export default function Login() {
                 onChange={ (e) => setLoginPassword(e.target.value)} />
           {checkInput && <ErrorText>Incorrect email or password</ErrorText>}
           <Button onClick={handleLogin}>Login</Button>
-        </FormLogin>
+        </FormWrapper>
       )
     }
-    </div>
+    </MainSection>
   )
 }
